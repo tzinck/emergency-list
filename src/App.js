@@ -65,6 +65,23 @@ class Employee extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
+
+    this.state.contactPhone = this.state.contactPhone.replace(/\D/g,'')
+
+    if (!this.state.name || !this.state.phone || !this.state.contact || !this.state.contactPhone) {
+      this.setState({
+        contact: this.props.contact
+      })
+      return;
+    }
+
+    if (this.state.phone.length < 4 || this.state.contactPhone.length < 4) {
+      this.setState({
+        contactPhone: this.props.contactPhone
+      })
+      return;
+    }
+
     fetch('http://localhost:8080/api/edit', {
       method: 'POST',
       headers: {
