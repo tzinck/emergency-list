@@ -1,0 +1,66 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #222;
+  height: 100px;
+  padding: 20px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.Employee-submit {
+  text-align: center;
+}
+
+.User-message p {
+  text-align: center;
+}
+
+.Employee-submit form {
+  display: inline-block;
+}
+
+.Employee-submit p {
+  display: table-row;
+}
+
+.phone {
+  padding-left: 10px;
+  font-style: italic;
+  color: darkslategray;
+}
+
+.employee-element {
+  position: relative;
+}
+
+.edit-button {
+  float:right;
+}
+
+li {
+  padding-top: 20px;
+}
+
+body {
+  background-color: lightslategray
+}
+
+form {
+  display: table;
+}
+
+label {
+  display: table-cell;
+  text-align: right;
+}
+
+input {
+  display: table-cell;
+}
