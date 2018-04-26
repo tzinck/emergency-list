@@ -28,7 +28,6 @@ class App extends Component {
 
 class Employee extends Component {
   constructor(props) {
-    console.log("Constructor")
     super(props);
 
     this.state = {
@@ -56,7 +55,6 @@ class Employee extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("props")
     this.setState({
       name: nextProps.name,
       phone: nextProps.phone,
@@ -81,10 +79,8 @@ class Employee extends Component {
       })
     }).then(
       (result) => {
-        console.log("Success editing resource")
       },
       (error) => {
-        console.log("ERROR EDITING RESOURCE")
       }
     )
   }
@@ -117,7 +113,6 @@ class SearchList extends Component {
           });
         },
         (error) => {
-          console.log("ERROR LOADING RESOURCE")
           this.setState({
             isLoaded: true,
           });
@@ -144,7 +139,7 @@ class SearchList extends Component {
         <p>
           *Note* to delete an entry, blank both contact fields, and hit 'Save'
         </p>
-        <ul>
+        <ul className="employee-list">
           {
             this.state.displayedEmployees.map((element, index) => {
               return <Employee key={index}
@@ -180,8 +175,23 @@ class InputField extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    // TODO: error checking here
-    // myString = myString.replace(/\D/g,''); to remove all but digits from phone number
+
+    this.state.phone = this.state.phone.replace(/\D/g,'');
+    this.state.contactPhone = this.state.contactPhone.replace(/\D/g,'')
+
+    if (!this.state.name || !this.state.phone || !this.state.contact || !this.state.contactPhone) {
+      this.setState({
+        userMessage: 'Error submitting form, must provide all fields'
+      });
+      return;
+    }
+
+    if (this.state.phone.length < 4 || this.state.contactPhone.length < 4) {
+      this.setState({
+        userMessage: 'Error submitting form, must provide valid phone number'
+      });
+      return;
+    }
 
     fetch('http://localhost:8080/api/add', {
       method: 'POST',
@@ -197,7 +207,6 @@ class InputField extends Component {
       })
     }).then(
         (result) => {
-          console.log("Success adding resource")
           this.setState({
             name: '',
             phone: '',
@@ -207,7 +216,6 @@ class InputField extends Component {
           })
         },
         (error) => {
-          console.log("ERROR ADDING RESOURCE")
           this.setState({
             userMessage: 'Error Submitting'
           })
@@ -231,7 +239,7 @@ class InputField extends Component {
             </p>
             <p>
               <label>Emergency Contact Name:</label>
-              <input value={this.state.contactName} name="contact" onChange={this.onChange} />
+              <input value={this.state.contact} name="contact" onChange={this.onChange} />
             </p>
             <p>
               <label>Emergency Contact Phone Number:</label>

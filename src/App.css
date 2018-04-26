@@ -38,14 +38,29 @@
 
 .employee-element {
   position: relative;
+  list-style-type: none;
+}
+
+.employee-list {
+  width: 50%;
+  display: inline-block;
 }
 
 .edit-button {
   float:right;
 }
 
+.employee {
+  float: left;
+}
+
+.phone {
+  float: left;
+}
+
 li {
   padding-top: 20px;
+  list-style-type: none;
 }
 
 body {
